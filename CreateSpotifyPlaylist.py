@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-def getList():
+def getArtistList(year):
     #Set URL will change to user input later
-    url = 'https://goldrushfestaz.com/lineup/'
+    url = 'https://djmag.com/top100djs/'+year
 
     #Get page from request package
     page = requests.get(url)
@@ -15,22 +15,22 @@ def getList():
         # we need a parser,Python built-in HTML parser is enough .
         soup=BeautifulSoup(page.content,'html.parser')   
          
-        #grab all html in Main   
-        results = soup.find(id="main")
+        #grab all top 100dj divs from site    
+        results = soup.findAll(name='div',class_='top100dj-name')
 
-        
-        job_elements = results.find_all("p")
+        #creates artust list from list of top 100 dj div elements
+        #Dev note add async or parllel later 
         artists = []
-        for i in range(0,len(job_elements)):
-            print(job_elements[i].text)
-            artists.append(job_elements[i].text.split('•' or '\n'))
-    
+        for result in results:
+            artists.append((result.find('a').text).replace('\n',''))
+
+        return(artists)
     else:
         print("reponse code error:"+page.status_code)
 
 
 def main():
-    getList()
+    getArtistList('2019')
 
 
 if __name__ == "__main__":
