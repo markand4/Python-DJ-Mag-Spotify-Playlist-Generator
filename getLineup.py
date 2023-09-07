@@ -15,17 +15,16 @@ def getList():
         # we need a parser,Python built-in HTML parser is enough .
         soup=BeautifulSoup(page.content,'html.parser')   
          
-        
+        #grab all html in Main   
         results = soup.find(id="main")
-        print(results.prettify())
-  
-        # l is the list which contains all the text i.e news 
-        l=soup.find("ul",{"class":"searchNews"})
-      
-        #now we want to print only the text part of the anchor.
-        #find all the elements of a, i.e anchor
-        for i in l.findAll("a"):
-            print(i.text)
+
+        
+        job_elements = results.find_all("p")
+        artists = []
+        for i in range(0,len(job_elements)):
+            print(job_elements[i].text)
+            artists.append(job_elements[i].text.split('•' or '\n'))
+    
     else:
         print("reponse code error:"+page.status_code)
 
