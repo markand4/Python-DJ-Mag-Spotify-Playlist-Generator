@@ -15,19 +15,24 @@ Before you begin, ensure you have met the following requirements:
 In order to use the Spotify API, you need to create a Spotify Developer app you need to follow [these steps](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/) to
 to get a client ID and a client secret. You will also need to define a redirect URI: http://localhost:8888/callback.
 
+You can use either a virtual enviroment or install [Python](https://www.python.org/downloads/), I will show you how to install and run on basis you have Python and [Pip](https://pip.pypa.io/en/stable/installation/) installed. 
+
 ## Installing Python DJ Mag Spotifu Playlist Generator 
 
-To install <project_name>, follow these steps:
+First, clone the repository and cd into it:
 
-Linux and macOS:
+```bash
+https://github.com/markand4/Python-DJ-Mag-Spotify-Playlist-Generator.git
+cd Python-DJ-Mag-Spotify-Playlist-Generator
 ```
-<install_command>
+Install Dependancies
+```bash
+pip install spotipy
+pip install requests
+pip install spotipy.oauth2
 ```
 
-Windows:
-```
-<install_command>
-```
+
 ## Using <project_name>
 
 To use <project_name>, follow these steps:
