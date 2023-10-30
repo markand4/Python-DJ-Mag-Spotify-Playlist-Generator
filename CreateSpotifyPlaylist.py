@@ -8,11 +8,13 @@ import spotipy
 import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
+import json
+import sys
 
 
 def getArtistList(year):
     #Set URL will change to user input later
-    url = 'https://djmag.com/top100djs/'+year
+    url = 'https://djmag.com/top100djs/'+str(year)
 
     #Get page from request package
     page = requests.get(url)
@@ -100,13 +102,20 @@ def createPlaylist(song_list):
     for songs_uri in song_uri_list:
         spotify.user_playlist_add_tracks(user=f'{currentUserID}',playlist_id=playlist['id'],tracks=songs_uri)
     
+    return(playlist['external_urls']['spotify'])
+    
 
 def main():
-    artists = getArtistList('2019')
+    print(sys.argv[1])
+    if(int(sys.argv[1])<2004 or int(sys.argv[1])>2022) or len(sys.argv) < 2 or sys.argv[1].isdigit() == False:
+        print("Entry must be a Year between 2004 and 2022")
+        sys.exit() 
+    artists = getArtistList(int(sys.argv[1])) 
     token = getSpotifyToken()
     artists_results = search_for_artists(token, artists)
     song_list = grabTopSongs(token, artists_results)
-    createPlaylist(song_list)
+    playListLink = createPlaylist(song_list)
+    print("Playlist created: "+playListLink)
     
 
 if __name__ == "__main__":
