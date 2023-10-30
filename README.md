@@ -27,10 +27,10 @@ cd Python-DJ-Mag-Spotify-Playlist-Generator
 ```
 Install Dependancies
 ```bash
-pip install spotipy
-pip install requests
-pip install spotipy.oauth2
+pip install -r requirements.txt
 ```
+
+
 
 
 ## Using <project_name>
